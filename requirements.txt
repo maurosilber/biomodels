@@ -1,0 +1,4 @@
+pooch
+pydantic
+pydantic-xml
+tabulate

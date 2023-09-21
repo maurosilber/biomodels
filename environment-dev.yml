@@ -1,0 +1,12 @@
+name: biomodels
+channels:
+  - conda-forge
+dependencies:
+  - pooch
+  - pydantic
+  - tabulate
+  - pre-commit
+  - pytest
+  - pip
+  - pip:
+    - pydantic-xml

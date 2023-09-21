@@ -1,0 +1,20 @@
+# Hidden and temporary files
+.*
+*~
+
+# Python
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+MANIFEST
+*.egg-info
+
+# Sphinx documentation
+docs/_build/
+docs/**/*.ipynb

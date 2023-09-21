@@ -1,0 +1,53 @@
+[project]
+name = "biomodels"
+authors = [
+    { name="Mauro Silberberg", email="maurosilber@gmail.com" },
+]
+description = "Download from the BioModels API"
+keywords = [
+"biomodels",
+"OMEX",
+"SBML",
+"SED-ML",
+]
+license = { file="LICENSE" }
+classifiers = [
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+]
+dynamic = ["dependencies", "optional-dependencies", "version"]
+requires-python = ">=3.10"
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[project.urls]
+"Homepage" = "https://github.com/maurosilber/biomodels"
+"Bug Tracker" = "https://github.com/maurosilber/biomodels/issues"
+
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = "requirements.txt"}
+optional-dependencies.test = {file = "requirements.test.txt"}
+
+[tool.setuptools_scm]
+
+[tool.pytest.ini_options]
+addopts = "--import-mode=importlib"
+pythonpath = "."
+
+[tool.ruff]
+select = ["E", "F", "I"]
+ignore = ["E501"]
