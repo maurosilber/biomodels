@@ -1,7 +1,7 @@
 from typing import Iterable, Mapping
 
 import pooch
-from tabulate import tabulate
+from tabulate import TableFormat, tabulate
 
 base_url = "https://www.ebi.ac.uk/biomodels"
 cache_path = pooch.os_cache("biomodels")
@@ -20,15 +20,17 @@ def as_table(
     iterable,
     *,
     attributes: Iterable[str] | Mapping[str, str],
-    tablefmt="simple",
+    tablefmt: TableFormat | str = "simple",
+    index: Iterable[str] | bool = True,
 ):
     if isinstance(attributes, Mapping):
         headers = attributes.values()
     else:
-        headers = attributes
+        headers = attributes = list(attributes)
 
     return tabulate(
-        ((i, *(getattr(c, k) for k in attributes)) for i, c in enumerate(iterable)),
-        headers=["", *headers],
+        [[getattr(c, k) for k in attributes] for c in iterable],
+        headers=list(headers),
         tablefmt=tablefmt,
+        showindex=index,
     )
