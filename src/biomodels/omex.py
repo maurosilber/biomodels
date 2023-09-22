@@ -50,7 +50,12 @@ class Manifest(
         )
 
 
-def get_omex(model_id: str, *, known_hash: str | None = None) -> Manifest:
+def get_omex(
+    model_id: str,
+    *,
+    known_hash: str | None = None,
+    progress_bar: bool = False,
+) -> Manifest:
     """Get OMEX file from BioModels.
 
     The file is cached in the user's cache directory.
@@ -69,7 +74,7 @@ def get_omex(model_id: str, *, known_hash: str | None = None) -> Manifest:
         known_hash=known_hash,
         fname=model_id,
         path=cache_path / "omex",
-        progressbar=True,
+        progressbar=progress_bar,
     )
     file = zipfile.Path(path)
     xml = (file / "manifest.xml").read_bytes()

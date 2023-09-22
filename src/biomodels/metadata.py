@@ -45,13 +45,19 @@ class Metadata(BaseModel):
         return self.files.__iter__()
 
 
-def get_metadata(model_id: str, *, known_hash: str | None = None) -> Metadata:
+def get_metadata(
+    model_id: str,
+    *,
+    known_hash: str | None = None,
+    progress_bar: bool = False,
+) -> Metadata:
     model_id = fix_id(model_id)
     path = pooch.retrieve(
         f"{base_url}/model/files/{model_id}?format=json",
         known_hash=known_hash,
         fname=model_id,
         path=Path(cache_path, "model", "files"),
+        progressbar=progress_bar,
     )
     with open(path) as f:
         data = json.load(f)
@@ -65,6 +71,7 @@ def get_file(
     *,
     model_id: str,
     known_hash: str | None = None,
+    progress_bar: bool,
 ) -> Path:
     ...
 
@@ -75,6 +82,7 @@ def get_file(
     *,
     model_id: None = None,
     known_hash: str | None = None,
+    progress_bar: bool,
 ) -> Path:
     ...
 
@@ -84,6 +92,7 @@ def get_file(
     *,
     model_id=None,
     known_hash=None,
+    progress_bar: bool = False,
 ) -> Path:
     if isinstance(file, File):
         model_id = file._model_id
@@ -96,5 +105,6 @@ def get_file(
         known_hash=known_hash,
         fname=file,
         path=Path(cache_path, "model", "download", model_id),
+        progressbar=progress_bar,
     )
     return Path(path)
