@@ -20,6 +20,7 @@ class File(BaseModel):
 class Metadata(Sequence, BaseModel):
     model_id: str
     files: list[File]
+    _file: Path
 
     model_config = ConfigDict(protected_namespaces=())
 
@@ -65,7 +66,13 @@ def get_metadata(
     with open(path) as f:
         data = json.load(f)
 
-    return Metadata(model_id=model_id, files=[*data["main"], *data["additional"]])
+    metadata = Metadata(model_id=model_id, files=[*data["main"], *data["additional"]])
+    metadata._file = Path(path)
+    metadata.files = [
+        metadata.files[0],
+        *sorted(metadata.files[1:], key=lambda x: x.name),
+    ]
+    return metadata
 
 
 @overload
