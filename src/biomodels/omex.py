@@ -1,4 +1,5 @@
 import zipfile
+from collections.abc import Sequence
 
 from pydantic_xml import BaseXmlModel, attr, element
 
@@ -12,6 +13,7 @@ class Content(BaseXmlModel, tag="content"):
 
 
 class Manifest(
+    Sequence,
     BaseXmlModel,
     tag="omexManifest",
     nsmap={"": "http://identifiers.org/combine.specifications/omex-manifest"},
@@ -29,8 +31,8 @@ class Manifest(
         else:
             raise TypeError("must be int or str")
 
-    def __iter__(self):
-        yield from map(self.__getitem__, range(len(self.contents)))
+    def __len__(self):
+        return len(self.contents)
 
     @property
     def master(self):

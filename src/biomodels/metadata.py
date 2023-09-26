@@ -1,4 +1,5 @@
 import json
+from collections.abc import Sequence
 from pathlib import Path
 from typing import overload
 
@@ -14,7 +15,7 @@ class File(BaseModel):
     _model_id: str
 
 
-class Metadata(BaseModel):
+class Metadata(Sequence, BaseModel):
     model_id: str
     files: list[File]
 
@@ -38,11 +39,11 @@ class Metadata(BaseModel):
             tablefmt="html",
         )
 
-    def __getitem__(self, item):
+    def __getitem__(self, item) -> File:
         return self.files[item]
 
-    def __iter__(self):
-        return self.files.__iter__()
+    def __len__(self):
+        return len(self.files)
 
 
 def get_metadata(
