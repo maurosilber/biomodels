@@ -29,6 +29,9 @@ class Manifest(
         else:
             raise TypeError("must be int or str")
 
+    def __iter__(self):
+        yield from map(self.__getitem__, range(len(self.contents)))
+
     @property
     def master(self):
         for c in self.contents:
