@@ -14,33 +14,31 @@ and cached locally.
 
 ```python
 >>> import biomodels
->>> metadata = biomodels.get_metadata("BIOMD12")  # no need to input leading zeros
+>>> metadata = biomodels.get_metadata("BIOMD0000000012")  # doctest: +SKIP
 Downloading data from 'https://www.ebi.ac.uk/biomodels/model/files/BIOMD0000000012?format=json' to file '.../Caches/biomodels/model/files/BIOMD0000000012'.
-SHA256 hash of downloaded file: c0e05feb5a37eae59e56791c816df20ec074085b54bf3193afb53934e54396d4
+SHA256 hash of downloaded file: ...
 Use this value as the 'known_hash' argument of 'pooch.retrieve' to ensure that the file hasn't changed if it is downloaded again in the future.
 ```
 
 Later, this file will get fetched from the local cache,
 instead of being redownloaded.
-It is a good practice to add the known hash to the call,
-as it will warn us if the file was modified.
 
 ```python
->>> metadata = biomodels.get_metadata("BIOMD12", known_hash="c0e05feb5a37eae59e56791c816df20ec074085b54bf3193afb53934e54396d4")
+>>> metadata = biomodels.get_metadata("BIOMD12")  # no need to input the leading zeros
 >>> metadata
     name                         description                            size
 --  ---------------------------  -----------------------------------  ------
  0  BIOMD0000000012_url.xml      main                                  46274
- 1  BIOMD0000000012.png          Auto-generated Reaction graph (PNG)   39018
- 2  BIOMD0000000012.vcml         Auto-generated VCML file              60183
- 3  BIOMD0000000012_urn.xml      Auto-generated SBML file with URNs    47097
- 4  BIOMD0000000012.svg          Auto-generated Reaction graph (SVG)   35750
- 5  BIOMD0000000012.m            Auto-generated Octave file             4994
- 6  BIOMD0000000012.xpp          Auto-generated XPP file                4114
- 7  BIOMD0000000012-biopax3.owl  Auto-generated BioPAX (Level 3)       23577
- 8  BIOMD0000000012.pdf          Auto-generated PDF file              205156
- 9  BIOMD0000000012-biopax2.owl  Auto-generated BioPAX (Level 2)       16748
-10  BIOMD0000000012.sci          Auto-generated Scilab file              154
+ 1  BIOMD0000000012.sci          Auto-generated Scilab file              154
+ 2  BIOMD0000000012.svg          Auto-generated Reaction graph (SVG)   35750
+ 3  BIOMD0000000012.vcml         Auto-generated VCML file              60183
+ 4  BIOMD0000000012-biopax2.owl  Auto-generated BioPAX (Level 2)       16748
+ 5  BIOMD0000000012-biopax3.owl  Auto-generated BioPAX (Level 3)       23577
+ 6  BIOMD0000000012_urn.xml      Auto-generated SBML file with URNs    47097
+ 7  BIOMD0000000012.m            Auto-generated Octave file             4994
+ 8  BIOMD0000000012.png          Auto-generated Reaction graph (PNG)   39018
+ 9  BIOMD0000000012.pdf          Auto-generated PDF file              205156
+10  BIOMD0000000012.xpp          Auto-generated XPP file                4114
 ```
 
 ### Get a particular file
@@ -49,8 +47,8 @@ To get a particular file,
 you can either pass the filename and model_id:
 
 ```python
->>> biomodels.get_file("BIOMD0000000012_url.xml", model_id="BIOMD0000000012")
-PosixPath('.../Caches/biomodels/model/download/BIOMD0000000012_url.xml')
+>>> biomodels.get_file("BIOMD0000000012_url.xml", model_id="BIOMD12")
+PosixPath('<CACHE_DIR>/biomodels/model/download/BIOMD0000000012/BIOMD0000000012_url.xml')
 ```
 
 or choose one from the metadata:
@@ -58,7 +56,7 @@ or choose one from the metadata:
 ```python
 >>> path = biomodels.get_file(metadata[0])
 >>> path
-PosixPath('.../Caches/biomodels/model/download/BIOMD0000000012_url.xml')
+PosixPath('<CACHE_DIR>/biomodels/model/download/BIOMD0000000012/BIOMD0000000012_url.xml')
 ```
 
 Then, you can use that `Path` object to load the file:
@@ -103,7 +101,7 @@ Then,
 you can get `zipfile.Path` objects by indexing this `omex` object,
 and read the contents from the OMEX file:
 
-```
+```python
 >>> print(omex[14].read_text())
 <?xml version="1.0" encoding="UTF-8"?>
 <sbml xmlns="http://www.sbml.org/sbml/level2/version3" metaid="_153818" level="2" version="3">

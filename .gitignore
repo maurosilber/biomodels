@@ -18,3 +18,6 @@ MANIFEST
 # Sphinx documentation
 docs/_build/
 docs/**/*.ipynb
+
+# Test
+test_readme.txt
