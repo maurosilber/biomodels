@@ -71,7 +71,7 @@ def get_file(
     *,
     model_id: str,
     known_hash: str | None = None,
-    progress_bar: bool,
+    progress_bar: bool = False,
 ) -> Path:
     ...
 
@@ -82,7 +82,7 @@ def get_file(
     *,
     model_id: None = None,
     known_hash: str | None = None,
-    progress_bar: bool,
+    progress_bar: bool = False,
 ) -> Path:
     ...
 
