@@ -100,6 +100,8 @@ def get_file(
         file = file.name
     elif model_id is None:
         raise TypeError("must provide model_id if file is a `str`")
+    else:
+        model_id = fix_id(model_id)
 
     path = pooch.retrieve(
         f"{base_url}/model/download/{model_id}?filename={file}",
