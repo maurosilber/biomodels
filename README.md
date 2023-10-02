@@ -97,12 +97,20 @@ which is a compressed file (260KB vs 500KB for this small model):
 15  BIOMD0000000012_urn.xml      https://identifiers.org/combine.specifications/sbml.level-2.version-3  False
 ```
 
+We can select a particular file by indexing:
+
+```python
+>>> content = omex[14]
+>>> content
+Content(location='BIOMD0000000012_url.xml', format='https://identifiers.org/combine.specifications/sbml.level-2.version-3', master=True)
+```
+
 Then,
-you can get `zipfile.Path` objects by indexing this `omex` object,
+you can get a `zipfile.Path` object with the `Content.path` attribute,
 and read the contents from the OMEX file:
 
 ```python
->>> print(omex[14].read_text())
+>>> print(content.path.read_text())
 <?xml version="1.0" encoding="UTF-8"?>
 <sbml xmlns="http://www.sbml.org/sbml/level2/version3" metaid="_153818" level="2" version="3">
 ...

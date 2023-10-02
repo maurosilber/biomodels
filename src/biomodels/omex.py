@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import zipfile
 from collections.abc import Sequence
+from typing import TYPE_CHECKING, Iterator
 
 from pydantic_xml import BaseXmlModel, attr, element
 
@@ -12,6 +13,11 @@ class Content(BaseXmlModel, tag="content"):
     location: str = attr()
     format: str = attr()
     master: bool = attr()
+    _zipfile: zipfile.Path
+
+    @property
+    def path(self) -> zipfile.Path:
+        return self._zipfile / self.location
 
 
 class Manifest(
@@ -24,14 +30,18 @@ class Manifest(
     _model_id: str
     _zipfile: zipfile.Path
 
-    def __getitem__(self, item: int | str) -> zipfile.Path:
+    def __getitem__(self, item: int | str) -> Content:
         if isinstance(item, int):
-            c = self.contents[item]
-            return self._zipfile / c.location
+            return self.contents[item]
         elif isinstance(item, str):
             raise NotImplementedError
         else:
             raise TypeError("must be int or str")
+
+    if TYPE_CHECKING:
+
+        def __iter__(self) -> Iterator[Content]:
+            ...
 
     def __len__(self):
         return len(self.contents)
@@ -88,4 +98,6 @@ def get_omex(
     manifest = Manifest.from_xml(xml)
     manifest._model_id = model_id
     manifest._zipfile = file
+    for c in manifest.contents:
+        c._zipfile = manifest._zipfile
     return manifest

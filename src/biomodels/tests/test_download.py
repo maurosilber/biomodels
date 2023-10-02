@@ -4,6 +4,7 @@ from typing import Sequence
 from pytest import raises
 
 from .. import get_all_identifiers, get_file, get_metadata, get_omex
+from ..omex import Content
 
 
 def test_get_all_identifiers():
@@ -56,7 +57,8 @@ def test_get_omex():
     assert len(omex) == 11 + 5
 
     file = omex[0]
-    assert isinstance(file, zipfile.Path)
+    assert isinstance(file, Content)
+    assert isinstance(file.path, zipfile.Path)
 
     master_file = omex.master
     assert isinstance(master_file, zipfile.Path)
