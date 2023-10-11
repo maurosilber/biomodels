@@ -79,9 +79,9 @@ which is a compressed file (260KB vs 500KB for this small model):
 >>> omex
     location                     format                                                                 master
 --  ---------------------------  ---------------------------------------------------------------------  --------
- 0  .                            https://identifiers.org/combine.specifications/omex                    False
- 1  ./manifest.xml               https://identifiers.org/combine.specifications/omex-manifest           False
- 2  ./metadata.rdf               https://identifiers.org/combine.specifications/omex-metadata           False
+ 0                               https://identifiers.org/combine.specifications/omex                    False
+ 1  manifest.xml                 https://identifiers.org/combine.specifications/omex-manifest           False
+ 2  metadata.rdf                 https://identifiers.org/combine.specifications/omex-metadata           False
  3  BIOMD0000000012-biopax2.owl  https://identifiers.org/combine.specifications/biopax.level-2          False
  4  BIOMD0000000012-biopax3.owl  https://identifiers.org/combine.specifications/biopax.level-3          False
  5  BIOMD0000000012.m            https://purl.org/NET/mediatypes/application/x.unknown                  False

@@ -2,15 +2,20 @@ from __future__ import annotations
 
 import zipfile
 from collections.abc import Sequence
-from typing import TYPE_CHECKING, Iterator
+from typing import TYPE_CHECKING, Annotated, Iterator
 
+from pydantic import AfterValidator
 from pydantic_xml import BaseXmlModel, attr, element
 
 from .common import as_table, base_url, cache_path, fix_id, pooch
 
 
+def remove_prefix(x: str, /):
+    return x.removeprefix(".").removeprefix("/")
+
+
 class Content(BaseXmlModel, tag="content"):
-    location: str = attr()
+    location: Annotated[str, AfterValidator(remove_prefix)] = attr()
     format: str = attr()
     master: bool = attr()
     _zipfile: zipfile.Path
