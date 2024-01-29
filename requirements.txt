@@ -1,4 +1,4 @@
 pooch
-pydantic
+pydantic<2.6  # https://github.com/dapper91/pydantic-xml/issues/167
 pydantic-xml
 tabulate
