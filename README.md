@@ -80,27 +80,27 @@ which is a compressed file (260KB vs 500KB for this small model):
     location                     format                                                                 master
 --  ---------------------------  ---------------------------------------------------------------------  --------
  0                               https://identifiers.org/combine.specifications/omex                    False
- 1  manifest.xml                 https://identifiers.org/combine.specifications/omex-manifest           False
- 2  metadata.rdf                 https://identifiers.org/combine.specifications/omex-metadata           False
- 3  BIOMD0000000012-biopax2.owl  https://identifiers.org/combine.specifications/biopax.level-2          False
- 4  BIOMD0000000012-biopax3.owl  https://identifiers.org/combine.specifications/biopax.level-3          False
- 5  BIOMD0000000012.m            https://purl.org/NET/mediatypes/application/x.unknown                  False
- 6  BIOMD0000000012.pdf          https://purl.org/NET/mediatypes/application/pdf                        False
- 7  BIOMD0000000012.png          https://purl.org/NET/mediatypes/image/png                              False
- 8  BIOMD0000000012.sci          https://purl.org/NET/mediatypes/application/x.unknown                  False
- 9  BIOMD0000000012.svg          https://purl.org/NET/mediatypes/application/xml                        False
-10  BIOMD0000000012.vcml         https://purl.org/NET/mediatypes/application/xml                        False
-11  BIOMD0000000012.xpp          https://purl.org/NET/mediatypes/application/x.unknown                  False
-12  BIOMD0000000012_manual.png   https://purl.org/NET/mediatypes/image/png                              False
-13  BIOMD0000000012_manual.svg   https://purl.org/NET/mediatypes/application/xml                        False
-14  BIOMD0000000012_url.xml      https://identifiers.org/combine.specifications/sbml.level-2.version-3  True
-15  BIOMD0000000012_urn.xml      https://identifiers.org/combine.specifications/sbml.level-2.version-3  False
+ 1  BIOMD0000000012-biopax2.owl  https://identifiers.org/combine.specifications/biopax.level-2          False
+ 2  BIOMD0000000012-biopax3.owl  https://identifiers.org/combine.specifications/biopax.level-3          False
+ 3  BIOMD0000000012.m            https://purl.org/NET/mediatypes/application/x.unknown                  False
+ 4  BIOMD0000000012.pdf          https://purl.org/NET/mediatypes/application/pdf                        False
+ 5  BIOMD0000000012.png          https://purl.org/NET/mediatypes/image/png                              False
+ 6  BIOMD0000000012.sci          https://purl.org/NET/mediatypes/application/x.unknown                  False
+ 7  BIOMD0000000012.svg          https://purl.org/NET/mediatypes/application/xml                        False
+ 8  BIOMD0000000012.vcml         https://purl.org/NET/mediatypes/application/xml                        False
+ 9  BIOMD0000000012.xpp          https://purl.org/NET/mediatypes/application/x.unknown                  False
+10  BIOMD0000000012_manual.png   https://purl.org/NET/mediatypes/image/png                              False
+11  BIOMD0000000012_manual.svg   https://purl.org/NET/mediatypes/application/xml                        False
+12  BIOMD0000000012_url.xml      https://identifiers.org/combine.specifications/sbml.level-2.version-3  True
+13  BIOMD0000000012_urn.xml      https://identifiers.org/combine.specifications/sbml.level-2.version-3  False
+14  manifest.xml                 https://identifiers.org/combine.specifications/omex-manifest           False
+15  metadata.rdf                 https://identifiers.org/combine.specifications/omex-metadata           False
 ```
 
 We can select a particular file by indexing:
 
 ```python
->>> content = omex[14]
+>>> content = omex[12]
 >>> content
 Content(location='BIOMD0000000012_url.xml', format='https://identifiers.org/combine.specifications/sbml.level-2.version-3', master=True)
 ```
