@@ -1,6 +1,7 @@
 name: Test on pre-releases
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 7 * * 1'  # every Monday at 7 AM UTC
 
